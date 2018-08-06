@@ -1,6 +1,19 @@
 apply plugin: 'java'
+apply plugin: 'eclipse'
+
+ext {
+	springVersion = '5.0.8.RELEASE'
+}
+
+repositories {
+	mavenCentral()
+}
 
 dependencies {
+	// https://mvnrepository.com/artifact/org.springframework/spring-webmvc
+	compile group: 'org.springframework', name: 'spring-webmvc', version: springVersion
+	// https://mvnrepository.com/artifact/org.springframework/spring-web
+	compile group: 'org.springframework', name: 'spring-web', version: springVersion
 }
 
 task wrapper(type: Wrapper) {
