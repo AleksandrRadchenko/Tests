@@ -3,6 +3,7 @@ apply plugin: 'eclipse'
 
 ext {
 	springVersion = '5.0.8.RELEASE'
+	jacksonVersion = '1.9.13'
 }
 
 repositories {
@@ -14,6 +15,8 @@ dependencies {
 	compile group: 'org.springframework', name: 'spring-webmvc', version: springVersion
 	// https://mvnrepository.com/artifact/org.springframework/spring-web
 	compile group: 'org.springframework', name: 'spring-web', version: springVersion
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.6'
 }
 
 task wrapper(type: Wrapper) {
