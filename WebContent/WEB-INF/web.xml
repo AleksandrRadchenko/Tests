@@ -15,16 +15,5 @@
       <servlet-name>mvc-rest-dispatcher</servlet-name>
       <url-pattern>/</url-pattern>
   </servlet-mapping>
-  
-  <!-- location of the root application context xml file -->
-  <context-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/mvc-rest-dispatcher-servlet.xml</param-value>
-  </context-param>
 
-  <!-- context loader listener
-  <listener>
-      <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
- -->
 </web-app>
