@@ -17,6 +17,9 @@ dependencies {
 	compile group: 'org.springframework', name: 'spring-web', version: springVersion
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.6'
+	
+	compile 'log4j:apache-log4j-extras:1.0' 
+	compile 'log4j:log4j:1.2.17' 
 }
 
 task wrapper(type: Wrapper) {
