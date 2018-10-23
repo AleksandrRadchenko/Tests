@@ -8,6 +8,7 @@ import javax.management.ObjectName;
 /**
  * Implemented this not best tutorial: {@link https://www.baeldung.com/java-management-extensions}
  * MBeans are used to interact with application remotely.
+ * Run Game class, start JConsole (in JDK /bin folder) and connect locally.
  */
 public class Game implements GameMBean
 {
