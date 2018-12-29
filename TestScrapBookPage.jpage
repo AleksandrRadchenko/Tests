@@ -1,8 +1,4 @@
-java.util.List<String> events = java.util.Arrays.asList("One", "Two", "Three", "Four");
-java.util.Iterator<String> iterator = events.iterator();
-while (iterator.hasNext()) {
-	String eventString = iterator.next();
-	System.out.println("Main iterator:" + eventString);
-	System.out.println("1st print inside loop:" + events.iterator().next());
-	System.out.println("2nd print inside loop:" + events.iterator().next());
-}
+new org.joda.time.DateTime(1071853495681L);
+new org.joda.time.DateTime(1071821095681L);
+
+true || false(boolean) true

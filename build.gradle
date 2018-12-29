@@ -18,6 +18,7 @@ dependencies {
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.6'
 	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+	compile group: 'joda-time', name: 'joda-time', version: '2.10'
 	
 	compile 'log4j:apache-log4j-extras:1.0' 
 	compile 'log4j:log4j:1.2.17'
