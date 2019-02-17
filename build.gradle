@@ -28,11 +28,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.hibernate/hibernate-core
 	compile group: 'org.hibernate', name: 'hibernate-core', version: '5.3.4.Final'
 
-
-	// https://mvnrepository.com/artifact/org.projectlombok/lombok
-	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.4'
+	compileOnly 'org.projectlombok:lombok:1.18.4'
+	annotationProcessor 'org.projectlombok:lombok:1.18.4'
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.7'
+wrapper {
+    gradleVersion = '5.2.1'
 }
