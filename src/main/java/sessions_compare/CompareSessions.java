@@ -1,5 +1,6 @@
 package sessions_compare;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,6 +16,13 @@ public class CompareSessions {
     private static final String EXTRA_PROD_SESSIONS_LIST = "src/main/resources/extra_prod_sessions.list";
 
     public static void main(String[] args) throws IOException {
+        String basePath = new File("").getAbsolutePath();
+        System.out.println(basePath);
+
+        String path = new File("src/main/resources/conf.properties")
+                .getAbsolutePath();
+        System.out.println(path);
+
         List<String> qcSessions = Files.readAllLines(Paths.get(QC_SESSIONS_LIST));
         List<String> prodSessions = Files.readAllLines(Paths.get(PROD_SESSIONS_LIST));
 
