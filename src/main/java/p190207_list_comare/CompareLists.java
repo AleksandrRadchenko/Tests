@@ -1,10 +1,8 @@
 package p190207_list_comare;
 
 
-import org.hamcrest.CoreMatchers;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
 import p190205_overriding_equals.User;
