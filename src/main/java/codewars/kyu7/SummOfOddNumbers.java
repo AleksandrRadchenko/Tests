@@ -17,6 +17,6 @@ package codewars.kyu7;
  */
 public class SummOfOddNumbers {
     public static int rowSumOddNumbers(int n) {
-        return 0;
+        return n * n * n;
     }
 }
