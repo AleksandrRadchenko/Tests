@@ -20,6 +20,12 @@ import java.util.function.DoubleBinaryOperator;
  * (like stack underflow or division by zero).
  * <p>
  * https://www.codewars.com/kata/reverse-polish-notation-calculator/train/java
+ *
+ * Benchmark (JMH)               (expr)  Mode  Cnt     Score   Error  Units
+ * MyBenchmark.naive  5 1 2 + 4 * + 3 -  avgt       1032,816          ns/op
+ * MyBenchmark.naive              5 1 -  avgt        344,017          ns/op
+ * MyBenchmark.stack  5 1 2 + 4 * + 3 -  avgt        607,408          ns/op
+ * MyBenchmark.stack              5 1 -  avgt        238,179          ns/op
  */
 public class ReversePolishNotation {
 
