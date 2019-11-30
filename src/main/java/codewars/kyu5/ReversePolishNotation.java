@@ -1,9 +1,6 @@
 package codewars.kyu5;
 
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.function.DoubleBinaryOperator;
 
 /**
@@ -30,22 +27,19 @@ public class ReversePolishNotation {
         if (expr.isBlank()) {
             return 0d;
         }
-        List<String> tokens = new LinkedList<>(Arrays.asList(expr.split(" ")));
-        ListIterator<String> iterator = tokens.listIterator();
-        while (iterator.hasNext()) {
-            String next = iterator.next();
-            Operator parsed = parseForOperator(next);
-            if (!Operator.NOT_OPERATOR.equals(parsed)) {
-                iterator.remove();
-                double right = Double.parseDouble(iterator.previous());
-                iterator.remove();
-                double left = Double.parseDouble(iterator.previous());
-                iterator.remove();
-                double result = parsed.apply(left, right);
-                iterator.add(String.valueOf(result));
+        String[] tokens = expr.split(" ");
+        LinkedList<Double> operands = new LinkedList<>();
+        for (String token : tokens) {
+            Operator operator = parseForOperator(token);
+            if (Operator.OPERAND.equals(operator)) {
+                operands.push(Double.parseDouble(token));
+            } else {
+                Double right = operands.pop();
+                Double left = operands.pop();
+                operands.push(operator.apply(left, right));
             }
         }
-        return Double.parseDouble(iterator.previous());
+        return operands.pop();
     }
 
     private Operator parseForOperator(String s) {
