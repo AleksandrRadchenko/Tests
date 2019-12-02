@@ -6,55 +6,52 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
 
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-@Warmup(iterations = 3)
+/**
+ * Benchmark                                     Mode  Cnt   Score   Error  Units
+ * RevertString.reverseStringUsingFor            avgt    3   7,567 ± 0,351  ns/op
+ * RevertString.reverseStringUsingStringBuilder  avgt    3  33,784 ± 0,703  ns/op
+ */
+@Warmup(iterations = 3, time = 1)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @BenchmarkMode(Mode.AverageTime)
-@Measurement(iterations = 5)
+@Measurement(iterations = 3, time = 1)
 @Fork(1)
+@State(Scope.Benchmark)
 public class RevertString {
-    final private static String s = "abc";
+    private static final String EXPR = "abc";
 
-    public static void main(String[] args) {
-//        char[] sInChars = reverseStringUsingFor(s.toCharArray());
-//        System.out.println("for: " + Arrays.toString(sInChars));
-//        sInChars = reverseStringUsingStringBuilder(s.toCharArray());
-//        System.out.println("sb: " + Arrays.toString(sInChars));
-//        sInChars = reverseStringUsingStream(s.toCharArray());
-//        System.out.println("stream: " + Arrays.toString(sInChars));
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(RevertString.class.getSimpleName())
+                .build();
+        new Runner(opt).run();
     }
 
     @Benchmark
-//    private static char[] reverseStringUsingStringBuilder(final char[] chars) {
-    private static char[] reverseStringUsingStringBuilder() {
-        char[] chars = s.toCharArray();
+    public static char[] reverseStringUsingStringBuilder() {
+        char[] chars = EXPR.toCharArray();
         StringBuilder sb = new StringBuilder(new String(chars));
         return sb.reverse().toString().toCharArray();
     }
 
-//    private static Collector toReversedArray = Collector.of(Character[]::new, );
-    private static char[] reverseStringUsingStream(final char[] chars) {
-        Character[] characters = new Character[chars.length];
-        for (int i = 0; i < chars.length; i++) {
-            characters[i] = chars[i];
-        }
-//        Object collect = Stream.of(characters).collect(toReversedArray);
-        return null;
-    }
-
     @Benchmark
-//    private static char[] reverseStringUsingFor(final char[] sInChars) {
-    private static char[] reverseStringUsingFor() {
-        char[] sInChars = s.toCharArray();
-        for (int i = 0; i < sInChars.length / 2; i++) {
-            char tmp = sInChars[sInChars.length - 1 - i];
-            sInChars[sInChars.length - 1 - i] = sInChars[i];
-            sInChars[i] = tmp;
+    public static char[] reverseStringUsingFor() {
+        char[] chars = EXPR.toCharArray();
+        for (int i = 0; i < chars.length / 2; i++) {
+            char tmp = chars[chars.length - 1 - i];
+            chars[chars.length - 1 - i] = chars[i];
+            chars[i] = tmp;
         }
-        return sInChars;
+        return chars;
     }
 }
