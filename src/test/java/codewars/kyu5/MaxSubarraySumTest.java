@@ -9,11 +9,11 @@ public class MaxSubarraySumTest {
     @Test
     public void sequence() {
         int[] arr = {};
-        assertThat(MaxSubarraySum.sequenceVariable(arr), is(0));
-        assertThat(MaxSubarraySum.sequenceVariable(new int[]{-2, -3, -1, -5}), is(0)); // all negative
-        assertThat(MaxSubarraySum.sequenceVariable(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}), is(6)); // should be 6: {4, -1, 2, 1}
-        assertThat(MaxSubarraySum.sequenceVariable(new int[]{-3, 4, -1, 2, 1, -5, 4}), is(6));
-        assertThat(MaxSubarraySum.sequenceVariable(new int[]{-2, 1, -3, 4, -1, 2, 1, -8, 2, 5}), is(7));
+        assertThat(MaxSubarraySum.usingVariable(arr), is(0));
+        assertThat(MaxSubarraySum.usingVariable(new int[]{-2, -3, -1, -5}), is(0)); // all negative
+        assertThat(MaxSubarraySum.usingVariable(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}), is(6)); // should be 6: {4, -1, 2, 1}
+        assertThat(MaxSubarraySum.usingVariable(new int[]{-3, 4, -1, 2, 1, -5, 4}), is(6));
+        assertThat(MaxSubarraySum.usingVariable(new int[]{-2, 1, -3, 4, -1, 2, 1, -8, 2, 5}), is(7));
     }
 
     @Test

@@ -10,7 +10,7 @@ import java.util.LinkedList;
 public class MaxSubarraySum {
     static final Logger LOG = LogManager.getLogger(MaxSubarraySum.class);
 
-    public static int sequenceVariable(int[] arr) {
+    public static int usingVariable(int[] arr) {
         int firstPositiveIndex = getFirstPositiveIndex(arr);
         if (firstPositiveIndex == -1) {
             return 0;
@@ -28,7 +28,7 @@ public class MaxSubarraySum {
         return max;
     }
 
-    public static int sequenceStack(int[] arr) {
+    public static int usingStack(int[] arr) {
         int firstPositiveIndex = getFirstPositiveIndex(arr);
         if (firstPositiveIndex == -1) {
             return 0;
@@ -44,6 +44,14 @@ public class MaxSubarraySum {
             }
         }
         return Collections.max(stack);
+    }
+
+    public static int usingCompacting(int[] arr) {
+        int firstPositiveIndex = getFirstPositiveIndex(arr);
+        if (firstPositiveIndex == -1) {
+            return 0;
+        }
+
     }
 
     private static int getFirstPositiveIndex(int[] arr) {
