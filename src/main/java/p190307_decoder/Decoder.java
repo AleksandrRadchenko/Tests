@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+@SuppressWarnings("squid:S106")
 public class Decoder {
-    private static final int first = 1072;
-    private static final int lastPlusOne = 1106;
+    private static final int FIRST = 1072;
+    private static final int LAST_PLUS_ONE = 1106;
     public static void main(String[] args) throws IOException {
         String s = Files.readAllLines(Paths.get("src/main/java/p190307_decoder/string.txt")).get(0);
         char[] chars = s.toCharArray();
-        String[] words = s.split(" ");
         System.out.println(s);
         for (int i = -9; i < -7; i++) {
             for (char aChar : chars) {
@@ -18,9 +18,6 @@ public class Decoder {
             }
             System.out.println();
         }
-//        for (char letter = 1040; letter <= 1110; letter++)  {
-//            System.out.println(letter + " " + (int) letter);// + " shifted: " + convertChar(letter, 10));
-//        }
     }
 
     private static char convertChar(char aChar, int shift) {
@@ -35,6 +32,6 @@ public class Decoder {
     }
 
     private static int shiftChar(char aChar, int shift) {
-        return first + (aChar - first + shift) % (lastPlusOne - first);
+        return FIRST + (aChar - FIRST + shift) % (LAST_PLUS_ONE - FIRST);
     }
 }
