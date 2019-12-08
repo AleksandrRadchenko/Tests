@@ -27,7 +27,6 @@ dependencies {
 	compile 'org.apache.logging.log4j:log4j-core:' + log4jVersion
 	compile 'org.hamcrest:java-hamcrest:2.0.0.0'
 	compile 'org.hamcrest:hamcrest-core:1.3'
-//	compile 'org.openjdk.jmh:jmh-core:' + jmhVersion
     compile 'javax.annotation:javax.annotation-api:1.3.2'
 
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.3.4.Final'
@@ -44,7 +43,7 @@ dependencies {
 
 jmh {
 	// Name of the benchmark to execute. Set '.*' to execute all benchmarks.
-	include = '.*'
+	include = 'SeqElemCalc'
 	duplicateClassesStrategy = DuplicatesStrategy.WARN
 }
 

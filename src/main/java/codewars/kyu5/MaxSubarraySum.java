@@ -9,6 +9,7 @@ import java.util.LinkedList;
 @SuppressWarnings("squid:S1118")
 public class MaxSubarraySum {
     static final Logger LOG = LogManager.getLogger(MaxSubarraySum.class);
+    public static final int ZERO = 0;
 
     public static int usingVariable(int[] arr) {
         int firstPositiveIndex = getFirstPositiveIndex(arr);
@@ -51,7 +52,7 @@ public class MaxSubarraySum {
         if (firstPositiveIndex == -1) {
             return 0;
         }
-
+        return 0;
     }
 
     private static int getFirstPositiveIndex(int[] arr) {
@@ -65,8 +66,30 @@ public class MaxSubarraySum {
         return firstPositiveIndex;
     }
 
-    static boolean sameSign(int current, int prev) {
+    static boolean sameSign(int prev, int current) {
         return prev >> 31 == current >> 31;
+    }
+
+    @SuppressWarnings("unused")
+    private static int[] compactNumbers(int[] source, int firstPositiveIndex) {
+        int[] result = new int[source.length - firstPositiveIndex];
+        int resultIdx = 0;
+        result[resultIdx] = source[firstPositiveIndex];
+        for (int sourceIdx = firstPositiveIndex + 1; sourceIdx < source.length; sourceIdx++) {
+            int prev = result[resultIdx];
+            int current = source[sourceIdx];
+            boolean isNext = sourceIdx + 1 < source.length;
+            int next = isNext ? source[sourceIdx + 1] : ZERO;
+            if (sameSign(prev, current)) {
+                result[resultIdx] += current;
+            } else if (isNext && next + current > 0) {
+                result[resultIdx] += current + next;
+                sourceIdx++;
+            } else {
+                sourceIdx++;
+            }
+        }
+        return result;
     }
 
     @SuppressWarnings("unused")
@@ -75,7 +98,7 @@ public class MaxSubarraySum {
         for (int i = firstPositiveIndex + 1; i < arr.length; i++) {
             int current = arr[i];
             int prev = stack.pop();
-            if (sameSign(current, prev)) {
+            if (sameSign(prev, current)) {
                 stack.push(prev + current);
             } else {
                 stack.push(current);

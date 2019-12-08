@@ -41,11 +41,11 @@ public class MaxSubarraySumBenchmark {
 
     @Benchmark
     public void stackBench(Blackhole bh) {
-        bh.consume(MaxSubarraySum.sequenceStack(EXPR));
+        bh.consume(MaxSubarraySum.usingStack(EXPR));
     }
 
     @Benchmark
     public void variableBench(Blackhole bh) {
-        bh.consume(MaxSubarraySum.sequenceVariable(EXPR));
+        bh.consume(MaxSubarraySum.usingVariable(EXPR));
     }
 }
