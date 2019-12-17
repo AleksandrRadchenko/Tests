@@ -63,6 +63,11 @@ import java.util.concurrent.TimeUnit;
  * calcRecursively                        21  avgt    3        39,268 ±       1,509  ns/op
  * calcRecursively                    123456  avgt    3    254698,192 ±   25725,423  ns/op
  * calcRecursively                  33554432  avgt    3  62053100,176 ± 2500441,078  ns/op
+ * calcConsecutively                       5  avgt    3        16,271 ±      29,965  ns/op
+ * calcConsecutively                      20  avgt    3        43,170 ±      21,768  ns/op
+ * calcConsecutively                      21  avgt    3        47,396 ±      29,541  ns/op
+ * calcConsecutively                  123456  avgt    3    164982,574 ±  266062,129  ns/op
+ * calcConsecutively                33554432  avgt    3  52556135,267 ± 2520739,061  ns/op
  */
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @BenchmarkMode(Mode.AverageTime)
@@ -97,6 +102,12 @@ public class SeqElemCalcBenchmark {
     @Benchmark
     public static int calcRecursivelyWithMapAsCache() {
         SeqElemCalc sem = new SeqElemCalc(new RecursionWithMapCacheCalcStrategy());
+        return sem.calc(arg);
+    }
+
+    @Benchmark
+    public static int calcConsecutively() {
+        SeqElemCalc sem = new SeqElemCalc(new ConsecutiveCalcStrategy());
         return sem.calc(arg);
     }
 }

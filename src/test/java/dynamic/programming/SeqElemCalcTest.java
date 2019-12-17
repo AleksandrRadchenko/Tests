@@ -24,6 +24,12 @@ public class SeqElemCalcTest {
         assertions(sem);
     }
 
+    @Test
+    public void calcConsecutively() {
+        SeqElemCalc sem = new SeqElemCalc(new ConsecutiveCalcStrategy());
+        assertions(sem);
+    }
+
     private void assertions(SeqElemCalc sem) {
         final int[] args = {33554432};
         final int[] expected = {4097};
