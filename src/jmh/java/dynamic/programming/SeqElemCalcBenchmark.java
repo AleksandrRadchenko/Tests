@@ -68,6 +68,11 @@ import java.util.concurrent.TimeUnit;
  * calcConsecutively                      21  avgt    3        47,396 ±      29,541  ns/op
  * calcConsecutively                  123456  avgt    3    164982,574 ±  266062,129  ns/op
  * calcConsecutively                33554432  avgt    3  52556135,267 ± 2520739,061  ns/op
+ * calcDynamically                         5  avgt    3       288,115 ±     797,071  ns/op
+ * calcDynamically                        20  avgt    3       693,116 ±     381,629  ns/op
+ * calcDynamically                        21  avgt    3       708,147 ±     270,208  ns/op
+ * calcDynamically                    123456  avgt    3      3907,773 ±    2302,248  ns/op
+ * calcDynamically                  33554432  avgt    3      8422,479 ±   10889,843  ns/op
  */
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @BenchmarkMode(Mode.AverageTime)
@@ -108,6 +113,12 @@ public class SeqElemCalcBenchmark {
     @Benchmark
     public static int calcConsecutively() {
         SeqElemCalc sem = new SeqElemCalc(new ConsecutiveCalcStrategy());
+        return sem.calc(arg);
+    }
+
+    @Benchmark
+    public static int calcDynamically() {
+        SeqElemCalc sem = new SeqElemCalc(new DynamicProgrammingCalcStrategy());
         return sem.calc(arg);
     }
 }
