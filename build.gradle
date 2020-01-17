@@ -44,6 +44,7 @@ dependencies {
 
 jmh {
 	// Name of the benchmark to execute. Set '.*' to execute all benchmarks.
+	//noinspection GrDeprecatedAPIUsage
 	include = 'SeqElemCalc'
 	duplicateClassesStrategy = DuplicatesStrategy.WARN
 }

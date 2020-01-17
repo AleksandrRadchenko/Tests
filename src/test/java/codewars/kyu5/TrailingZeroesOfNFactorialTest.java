@@ -15,6 +15,8 @@ public class TrailingZeroesOfNFactorialTest {
     public void zeroes() {
         assertThat(classUnderTest.zeros(Integer.MAX_VALUE), is(536870902));
         assertThat(classUnderTest.zeros(Integer.MAX_VALUE/2), is(268435446));
+        //Integer.MAX_VALUE / 5 + 1 - minimum number (but stil 32 bit) that can detect java int overflow.
+        assertThat(classUnderTest.zeros(429496730), is(107374174));
         assertThat(classUnderTest.zeros(1000000000), is(249999998));
         assertThat(classUnderTest.zeros(200000), is(49998));
         assertThat(classUnderTest.zeros(12), is(2));

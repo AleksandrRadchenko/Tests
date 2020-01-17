@@ -7,23 +7,32 @@ import static org.junit.Assert.assertThat;
 
 public class MaxSubarraySumTest {
     @Test
-    public void sequence() {
+    public void usingPartialSums() {
         int[] arr = {};
-        assertThat(MaxSubarraySum.usingVariable(arr), is(0));
-        assertThat(MaxSubarraySum.usingVariable(new int[]{-2, -3, -1, -5}), is(0)); // all negative
-        assertThat(MaxSubarraySum.usingVariable(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}), is(6)); // should be 6: {4, -1, 2, 1}
-        assertThat(MaxSubarraySum.usingVariable(new int[]{-3, 4, -1, 2, 1, -5, 4}), is(6));
-        assertThat(MaxSubarraySum.usingVariable(new int[]{-2, 1, -3, 4, -1, 2, 1, -8, 2, 5}), is(7));
+        assertThat(MaxSubarraySum.usingPartialSums(arr), is(0));
+        assertThat(MaxSubarraySum.usingPartialSums(new int[]{-2, -3, -1, -5}), is(-1)); // all negative
+        assertThat(MaxSubarraySum.usingPartialSums(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}), is(6)); // should be 6: {4, -1, 2, 1}
+        assertThat(MaxSubarraySum.usingPartialSums(new int[]{-3, 4, -1, 2, 1, -5, 4}), is(6));
+        assertThat(MaxSubarraySum.usingPartialSums(new int[]{-2, 1, -3, 4, -1, 2, 1, -8, 2, 5}), is(7));
     }
 
     @Test
-    public void sameSign() {
-        assertThat(MaxSubarraySum.sameSign(Integer.MAX_VALUE, Integer.MAX_VALUE), is(true));
-        assertThat(MaxSubarraySum.sameSign(Integer.MIN_VALUE, Integer.MIN_VALUE), is(true));
-        assertThat(MaxSubarraySum.sameSign(-6, -5), is(true));
-        assertThat(MaxSubarraySum.sameSign(4, 2), is(true));
-        assertThat(MaxSubarraySum.sameSign(-4, 2), is(false));
-        assertThat(MaxSubarraySum.sameSign(-4, 0), is(false));
-        assertThat(MaxSubarraySum.sameSign(4, 0), is(true));
+    public void naiveUsingVariable() {
+        int[] arr = {};
+        assertThat(MaxSubarraySum.naiveUsingVariable(arr), is(0));
+        assertThat(MaxSubarraySum.naiveUsingVariable(new int[]{-2, -3, -1, -5}), is(-1)); // all negative
+        assertThat(MaxSubarraySum.naiveUsingVariable(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}), is(6)); // should be 6: {4, -1, 2, 1}
+        assertThat(MaxSubarraySum.naiveUsingVariable(new int[]{-3, 4, -1, 2, 1, -5, 4}), is(6));
+        assertThat(MaxSubarraySum.naiveUsingVariable(new int[]{-2, 1, -3, 4, -1, 2, 1, -8, 2, 5}), is(7));
+    }
+
+    @Test
+    public void naiveUsingStack() {
+        int[] arr = {};
+        assertThat(MaxSubarraySum.naiveUsingStack(arr), is(0));
+        assertThat(MaxSubarraySum.naiveUsingStack(new int[]{-2, -3, -1, -5}), is(-1)); // all negative
+        assertThat(MaxSubarraySum.naiveUsingStack(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}), is(6)); // should be 6: {4, -1, 2, 1}
+        assertThat(MaxSubarraySum.naiveUsingStack(new int[]{-3, 4, -1, 2, 1, -5, 4}), is(6));
+        assertThat(MaxSubarraySum.naiveUsingStack(new int[]{-2, 1, -3, 4, -1, 2, 1, -8, 2, 5}), is(7));
     }
 }

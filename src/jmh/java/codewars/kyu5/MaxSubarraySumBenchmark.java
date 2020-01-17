@@ -9,7 +9,6 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.infra.Blackhole;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -30,7 +29,12 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 2, time = 1)
 @State(Scope.Benchmark)
 public class MaxSubarraySumBenchmark {
-    private static final int[] EXPR = new int[]{-2, 1, -3, 4, -1, 2, 1, -8, 2, 5};
+    private static final int[] EXPR = new int[]{-2, 1, -3, 4, -1, 2, 1, -8, 2, 5,
+                                                -2, 1, -3, 4, -1, 2, 1, -8, 2, 5,
+                                                -2, 1, -3, 4, -1, 2, 1, -8, 2, 5,
+                                                -2, 1, -3, 4, -1, 2, 1, -8, 2, 5,
+                                                -2, 1, -3, 4, -1, 2, 1, -8, 2, 5,
+                                                -2, 1, -3, 4, -1, 2, 1, -8, 2, 5};
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
@@ -40,12 +44,17 @@ public class MaxSubarraySumBenchmark {
     }
 
     @Benchmark
-    public void stackBench(Blackhole bh) {
-        bh.consume(MaxSubarraySum.usingStack(EXPR));
+    public int usingPartialSums() {
+        return MaxSubarraySum.usingPartialSums(EXPR);
     }
 
     @Benchmark
-    public void variableBench(Blackhole bh) {
-        bh.consume(MaxSubarraySum.usingVariable(EXPR));
+    public int naiveUsingStack() {
+        return MaxSubarraySum.naiveUsingStack(EXPR);
+    }
+
+    @Benchmark
+    public int naiveUsingVariable() {
+        return MaxSubarraySum.naiveUsingVariable(EXPR);
     }
 }
