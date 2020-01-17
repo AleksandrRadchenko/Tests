@@ -20,6 +20,7 @@ dependencies {
 	compile group: 'org.springframework', name: 'spring-webmvc', version: springVersion
 	compile group: 'org.springframework', name: 'spring-web', version: springVersion
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.6'
+	compile 'org.apache.commons:commons-collections4:4.4'
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
 	compile group: 'joda-time', name: 'joda-time', version: '2.10'
 
@@ -27,7 +28,6 @@ dependencies {
 	compile 'org.apache.logging.log4j:log4j-core:' + log4jVersion
 	compile 'org.hamcrest:java-hamcrest:2.0.0.0'
 	compile 'org.hamcrest:hamcrest-core:1.3'
-//	compile 'org.openjdk.jmh:jmh-core:' + jmhVersion
     compile 'javax.annotation:javax.annotation-api:1.3.2'
 
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.3.4.Final'
@@ -44,7 +44,8 @@ dependencies {
 
 jmh {
 	// Name of the benchmark to execute. Set '.*' to execute all benchmarks.
-	include = '.*'
+	//noinspection GrDeprecatedAPIUsage
+	include = 'SeqElemCalc'
 	duplicateClassesStrategy = DuplicatesStrategy.WARN
 }
 
