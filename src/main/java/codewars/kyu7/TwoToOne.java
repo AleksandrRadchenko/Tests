@@ -3,6 +3,7 @@ package codewars.kyu7;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("squid:S1118")
 public class TwoToOne {
     public static String longestMap(String s1, String s2) {
         char[] conc = s1.concat(s2).toCharArray();
