@@ -29,4 +29,14 @@ public class StrongestEvenNumber {
     static int twoPow(int currentStrength) {
         return 1 << currentStrength;
     }
+
+    public static int strongestEvenAlt(int n, int m) {
+        while (m >= n) {
+            if ((m & (m - 1)) < n) {
+                return m;
+            }
+            m &= m - 1;
+        }
+        return 0;
+    }
 }

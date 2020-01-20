@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static codewars.kyu6.StrongestEvenNumber.getStrength;
 import static codewars.kyu6.StrongestEvenNumber.strongestEven;
+import static codewars.kyu6.StrongestEvenNumber.strongestEvenAlt;
 import static codewars.kyu6.StrongestEvenNumber.twoPow;
 import static org.junit.Assert.*;
 
@@ -29,5 +30,13 @@ public class StrongestEvenNumberTest {
         assertEquals(4, getStrength(48));
         assertEquals(1, getStrength(6));
         assertEquals(2, getStrength(12));
+    }
+
+    @Test
+    public void strongestEvenOptimizedTest() {
+        assertEquals(1073741824, strongestEvenAlt(1, Integer.MAX_VALUE));
+        assertEquals(2, strongestEvenAlt(1, 2));
+        assertEquals(8, strongestEvenAlt(5, 10));
+        assertEquals(48, strongestEvenAlt(48, 56));
     }
 }

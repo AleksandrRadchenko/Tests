@@ -21,6 +21,10 @@ import java.util.concurrent.TimeUnit;
  * Benchmark          Mode    Cnt Score           Error        Units
  * powOfTwoCyclist    thrpt   10  411855950,327 ± 5471464,373  ops/s
  * powOfTwoLibrarian  thrpt   10   43705584,857 ±  136146,781  ops/s
+ *
+ * Benchmark              Mode   Cnt Score          Error       Units
+ * strongestEven          thrpt  10   2756863,827 ±  35706,988  ops/s
+ * strongestEvenAlt thrpt  10  62877964,011 ± 147694,419  ops/s
  */
 @SuppressWarnings({"unused"})
 @OutputTimeUnit(TimeUnit.SECONDS)
@@ -38,11 +42,11 @@ public class StrongestEvenNumberBenchmark {
     }
 
     @Benchmark
-    public static void powOfTwoCyclist(Blackhole bh) {
-        bh.consume(StrongestEvenNumber.twoPow(8));
+    public static void strongestEven(Blackhole bh) {
+        bh.consume(StrongestEvenNumber.strongestEven(1, Integer.MAX_VALUE));
     }
     @Benchmark
-    public static void powOfTwoLibrarian(Blackhole bh) {
-        bh.consume(Math.pow(2, 8));
+    public static void strongestEvenAlt(Blackhole bh) {
+        bh.consume(StrongestEvenNumber.strongestEvenAlt(1, Integer.MAX_VALUE));
     }
 }
