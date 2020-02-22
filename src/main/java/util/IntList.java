@@ -5,9 +5,16 @@ import java.util.Objects;
 
 public class IntList {
     private static final int DEFAULT_CAPACITY = 10;
-    private static final int[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
+    private static final int[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = new int[DEFAULT_CAPACITY];
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
     private int size;
+
+    /**
+     * For JOL purposes
+     */
+    public int[] getElementData() {
+        return elementData;
+    }
 
     private int[] elementData = new int[DEFAULT_CAPACITY];
 
@@ -17,6 +24,19 @@ public class IntList {
 
     public boolean add(int e) {
         add(size(), e);
+        return true;
+    }
+
+    public boolean addAll(int[] e) {
+        int size = size() + e.length;
+        int[] elementData = this.elementData;
+        if (size > this.elementData.length) {
+            elementData = grow(size);
+        }
+        System.arraycopy(e, 0,
+                elementData, size(),
+                e.length);
+        this.size = size;
         return true;
     }
 
