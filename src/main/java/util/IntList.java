@@ -8,6 +8,15 @@ public class IntList {
     private static final int[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = new int[DEFAULT_CAPACITY];
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
     private int size;
+    private int[] elementData;
+
+    public IntList() {
+        this(DEFAULT_CAPACITY);
+    }
+
+    public IntList(int capacity) {
+        elementData = new int[capacity];
+    }
 
     /**
      * For JOL purposes
@@ -15,8 +24,6 @@ public class IntList {
     public int[] getElementData() {
         return elementData;
     }
-
-    private int[] elementData = new int[DEFAULT_CAPACITY];
 
     public int size() {
         return size;
@@ -60,8 +67,9 @@ public class IntList {
     }
 
     public void clear() {
-        elementData = new int[0];
-        size = 0;
+        final int[] es = elementData;
+        for (int to = size, i = size = 0; i < to; i++)
+            es[i] = 0;
     }
 
     private int[] grow() {
