@@ -49,8 +49,8 @@ dependencies {
 jmh {
 	// Name of the benchmark to execute. Set '.*' to execute all benchmarks.
 	//noinspection GrDeprecatedAPIUsage
-	include = 'IntListBenchmark'
-//	profilers = ['stack:lines=100']
+	include = 'RadixSortBenchmark'
+	profilers = ['stack:lines=2;period=2']
 	duplicateClassesStrategy = DuplicatesStrategy.WARN
 }
 

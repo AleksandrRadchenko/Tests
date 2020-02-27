@@ -9,6 +9,7 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.profile.StackProfiler;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -25,14 +26,14 @@ import java.util.stream.Collectors;
  * RadixSortBenchmark.radixSortBench  avgt    3  383611,117 ± 58074,767  ns/op
  */
 @SuppressWarnings({"unused"})
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @BenchmarkMode(Mode.AverageTime)
 @Fork(1)
-@Measurement(iterations = 3, time = 1)
+@Measurement(iterations = 5, time = 1)
 @Warmup(iterations = 2, time = 1)
 @State(Scope.Benchmark)
 public class RadixSortBenchmark {
-    private static final int SIZE = 1000000;
+    private static final int SIZE = 10000;
     private static final List<Integer> ORIGINAL =
             new Random().ints(SIZE, 0, Integer.MAX_VALUE)
                         .boxed()
@@ -43,6 +44,7 @@ public class RadixSortBenchmark {
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .include(RadixSortBenchmark.class.getSimpleName())
+                .addProfiler(StackProfiler.class, "lines=100;period=2")
                 .build();
         new Runner(opt).run();
     }

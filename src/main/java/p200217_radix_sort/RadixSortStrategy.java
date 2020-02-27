@@ -1,74 +1,79 @@
 package p200217_radix_sort;
 
-import java.util.ArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class RadixSortStrategy implements SortingStrategy<Integer> {
-    static int radix = 10;
-    private List<List<Integer>> buckets = new ArrayList<>(radix);
-
-    public RadixSortStrategy() {
-        for (int i = 0; i < radix; i++) {
-            buckets.add(new LinkedList<>());
-        }
-    }
-
-    @Override
-    public Collection<Integer> sort(Collection<Integer> col) {
-        Queue<Integer> c = new LinkedList<>(col);
-        boolean areNonZeroDigits = true;
-        int digitIndex = 0;
-        while (areNonZeroDigits) {
-            areNonZeroDigits = toBuckets(c, digitIndex);
-            digitIndex++;
-            fromBuckets(c);
-        }
-        return c;
-    }
-
-    private boolean toBuckets(Queue<Integer> c, int digitIndex) {
-        Integer number = c.poll();
-        boolean areNonZeroDigits = false;
-        while (number != null) {
-            int bucket = getDigitByIndex(number, digitIndex);
-            buckets.get(bucket).add(number);
-            if (bucket > 0) {
-                areNonZeroDigits = true;
-            }
-            number = c.poll();
-        }
-        return areNonZeroDigits && digitIndex < radix - 1;
-    }
-
-    private void fromBuckets(Queue<Integer> c) {
-        for (List<Integer> bucket : buckets) {
-            Iterator<Integer> iterator = bucket.iterator();
-            while (iterator.hasNext()) {
-                c.add(iterator.next());
-                iterator.remove();
-            }
-        }
-    }
-
-    private static final int[] POWERS_OF_10 = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000};
-
-    private static int powerOfTen(int pow) {
-        return POWERS_OF_10[pow];
-    }
-
-    public static int getDigitByIndex(Integer digit, int index) {
-        if (index > radix - 1) {
-            throw new IllegalArgumentException("There can't be more than 10 digits in the integer");
-        }
-        return (digit / powerOfTen(index)) % 10;
-    }
+    private static final int RADIX = 10;
 
     @Override
     public List<Integer> sort(List<Integer> col) {
         return (List<Integer>) sort((Collection<Integer>) col);
+    }
+
+    @Override
+    public Collection<Integer> sort(Collection<Integer> col) {
+        int power = col.size();
+        IntArrayList elements = new IntArrayList(col);
+        IntArrayList[] buckets = createBuckets(power);
+        boolean onlyFirstBucketUsed = false;
+        int radix = 1;
+        while (!onlyFirstBucketUsed && radix <= RADIX) {
+            onlyFirstBucketUsed = to(buckets, elements, radix);
+            elements = from(buckets, power);
+            radix++;
+        }
+        return elements;
+    }
+
+    private IntArrayList[] createBuckets(int size) {
+        IntArrayList[] buckets = new IntArrayList[RADIX];
+        for (int i = 0; i < RADIX; i++) {
+            buckets[i] = new IntArrayList(size);
+        }
+        return buckets;
+    }
+
+    private boolean to(IntArrayList[] buckets, IntArrayList elements, int radix) {
+        boolean onlyFirstBucketUsed = true;
+        for (int i = 0; i < elements.size(); i++) {
+            int number = elements.getInt(i);
+            int bucket = getDigitByRadix(number, radix);
+            buckets[bucket].add(number);
+            if (bucket > 0) {
+                onlyFirstBucketUsed = false;
+            }
+        }
+        elements.clear();
+        return onlyFirstBucketUsed;
+    }
+
+    private IntArrayList from(IntArrayList[] buckets, int power) {
+        int index = 0;
+        int[] elementsArray = new int[power];
+        for (IntArrayList bucket : buckets) {
+            System.arraycopy(bucket.toIntArray(), 0, elementsArray, index, bucket.size());
+            index += bucket.size();
+            bucket.clear();
+        }
+        return new IntArrayList(elementsArray);
+    }
+
+    private static final int[] POWERS_OF_10 = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000};
+
+    public static int getDigitByRadix(int digit, int radix) {
+        if (radix > RADIX) {
+            throw new IllegalArgumentException("There can't be more than " + RADIX + " digits in the number");
+        }
+        return (digit / powerOfTen(radix - 1)) % 10;
+    }
+
+    private static int powerOfTen(int pow) {
+        if (pow > 10) {
+            throw new IllegalArgumentException("power exceeds int capacity");
+        }
+        return POWERS_OF_10[pow];
     }
 }
