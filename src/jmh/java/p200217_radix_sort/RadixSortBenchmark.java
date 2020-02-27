@@ -33,13 +33,14 @@ import java.util.stream.Collectors;
 @Warmup(iterations = 2, time = 1)
 @State(Scope.Benchmark)
 public class RadixSortBenchmark {
-    private static final int SIZE = 10000;
+    private static final int SIZE = 30; // for SIZE <= 32 JDK uses binary insertion sort
     private static final List<Integer> ORIGINAL =
             new Random().ints(SIZE, 0, Integer.MAX_VALUE)
                         .boxed()
                         .collect(Collectors.toList());
     private static final Sorter<Integer> radixSorter = new Sorter<>(new RadixSortStrategy());
     private static final Sorter<Integer> jdkSorter = new Sorter<>(new JDKSortStrategy());
+    private static final Sorter<Integer> binaryInsertionSorter = new Sorter<>(new BinaryInsertionSortStrategy());
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
@@ -57,5 +58,10 @@ public class RadixSortBenchmark {
     @Benchmark
     public List<Integer> jdkSortBench() {
         return jdkSorter.sort(ORIGINAL);
+    }
+
+    @Benchmark
+    public List<Integer> binaryInsertionSortBench() {
+        return binaryInsertionSorter.sort(ORIGINAL);
     }
 }

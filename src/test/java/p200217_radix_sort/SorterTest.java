@@ -42,4 +42,12 @@ public class SorterTest {
         assertThat(sorter.sort(original2)).isEqualTo(sorted2);
         assertThat(sorter.sort(ORIGINAL)).isEqualTo(SORTED);
     }
+
+    @Test
+    public void binaryInsertionSortTest() {
+        Sorter<Integer> sorter = new Sorter<>(new BinaryInsertionSortStrategy());
+        assertThat(sorter.sort(original1)).isEqualTo(sorted1);
+        assertThat(sorter.sort(original2)).isEqualTo(sorted2);
+        assertThat(sorter.sort(ORIGINAL)).isEqualTo(SORTED);
+    }
 }
